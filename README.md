@@ -1,6 +1,36 @@
 `resolver` provides utilities for parsing semantic version strings,
 and managing dependency versions.
 
+# Example
+
+```nim
+import resolver
+
+let a = parseVersionRule("~= 1.0.0")
+assert     a.matches("1.0.1")
+assert not a.matches("1.1.0")
+assert not a.matches("2.0.0")
+
+let b = parseVersionRule("^= 1.0.0")
+assert     b.matches("1.0.1")
+assert     b.matches("1.1.0")
+assert not b.matches("2.0.0")
+
+let c = parseVersionRule(">= 1.0.0")
+assert     c.matches("1.0.1")
+assert     c.matches("1.1.0")
+assert     c.matches("2.0.0")
+
+let d = parseDependency("nim", "^= 1.6.0")
+assert not d.matches("flimflam", "1.6.0")
+assert     d.matches("nim", "1.6.0")
+assert     d.matches("nim", "1.7.0-alpha.2")
+assert not d.matches("nim", "1.6.0-alpha.2")
+assert     d.matches("nim", "1.7.0")
+assert     d.matches("NIM", "1.7.0")
+assert     d.matches("N_I_M", "1.7.0")
+```
+
 # Dependency Strings
 
 Here are some valid dependency strings:
@@ -31,27 +61,6 @@ more strict.
 
 - `~=` requires the major AND minor version numbers to match the rule.
 - `^=` requires only the major version number to match the rule.
-
-# Example
-
-```nim
-import resolver
-
-let a = parseVersionRule("~= 1.0.0")
-assert     a.matches("1.0.1")
-assert not a.matches("1.1.0")
-assert not a.matches("2.0.0")
-
-let b = parseVersionRule("^= 1.0.0")
-assert     b.matches("1.0.1")
-assert     b.matches("1.1.0")
-assert not b.matches("2.0.0")
-
-let c = parseVersionRule(">= 1.0.0")
-assert     c.matches("1.0.1")
-assert     c.matches("1.1.0")
-assert     c.matches("2.0.0")
-```
 
 # Future plans
 
