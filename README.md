@@ -52,3 +52,8 @@ assert     c.matches("1.0.1")
 assert     c.matches("1.1.0")
 assert     c.matches("2.0.0")
 ```
+
+# Future plans
+
+The existing API is not likely to change. However, this package will eventually
+provide more extensive tools for resolving, merging, and ordering dependencies.
