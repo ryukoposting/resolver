@@ -21,7 +21,7 @@ assert     c.matches("1.0.1")
 assert     c.matches("1.1.0")
 assert     c.matches("2.0.0")
 
-let d = parseDependency("nim", "^= 1.6.0")
+let d = parseDependency("nim ^= 1.6.0")
 assert not d.matches("flimflam", "1.6.0")
 assert     d.matches("nim", "1.6.0")
 assert     d.matches("nim", "1.7.0-alpha.2")
