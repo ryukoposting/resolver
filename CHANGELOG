@@ -1,0 +1,11 @@
+Version 0.1.0, 2022/11/18:
+  - Full semver version string support
+  - Version rules with the following operators:
+    - `>=`
+    - `<=`
+    - `^=`
+    - `~=`
+    - `==`
+    - `!=`
+  - Dependency string parsing
+
