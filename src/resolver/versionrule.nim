@@ -71,10 +71,13 @@ proc parseAnd(input: string, rule: var VersionRule, start = 0, opts = DefaultVer
 proc parseOr(input: string, rule: var VersionRule, start = 0, opts = DefaultVersionParseOpts): int
 proc parseOperator(input: string, op: var VersionRuleKind, start = 0): int
 
+const VersionRuleStartChars* = {'>', '^', '!', '<', '=', '~', '('}
+
 proc parseVersionRule*(input: string, rule: var VersionRule, start = 0, opts = DefaultVersionParseOpts): int =
   ## Parse the given string into a VersionRule. `opts` controls the parser's behavior.
   ## Returns the number of characters parsed.
-  result = parseOr(input, rule, start, opts)
+  result += parseOr(input, rule, start+result, opts)
+
   if start + result < len(input) and ConsumeWholeInput in opts:
     raise (start+result).newParseError("Unexpected tokens at end of version rule string")
 
@@ -189,6 +192,7 @@ proc `/`*(left, right: VersionRule): VersionRule =
   )
 
 proc `$`*(rule: VersionRule): string =
+  if rule.isNil: return "nil"
   case rule.kind:
   of vrEqual:
     result = fmt"== {rule.version}"

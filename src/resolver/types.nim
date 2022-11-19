@@ -1,3 +1,5 @@
+import std/uri
+
 type
   Version* = object ##\
     ## Represents a version conforming with Semver.
@@ -50,6 +52,7 @@ type
     ## A dependency is a package name with a corresponding VersionRule.
     packageName*: string
     versionRule*: VersionRule
+    location*: Uri
 
   ParseVersionError* = object of ValueError
 
