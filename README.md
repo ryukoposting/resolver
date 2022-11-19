@@ -4,7 +4,7 @@ and managing dependency versions.
 # Example
 
 ```nim
-import resolver
+import resolver, std/uri
 
 let a = parseVersionRule("~= 1.0.0")
 assert     a.matches("1.0.1")
@@ -29,6 +29,12 @@ assert not d.matches("nim", "1.6.0-alpha.2")
 assert     d.matches("nim", "1.7.0")
 assert     d.matches("NIM", "1.7.0")
 assert     d.matches("N_I_M", "1.7.0")
+
+let f = parseDependency("nim >= 1.6.4 https://github.com/nim-lang/nim.git")
+assert     f.matches("nim", "1.6.4")
+assert     f.matches("nim", "1.7.5")
+assert not f.matches("nim", "1.6.3")
+assert $f.location == "https://github.com/nim-lang/nim.git"
 ```
 
 # Dependency Strings
