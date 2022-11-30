@@ -53,3 +53,8 @@ proc matches*(dep: Dependency, package, version: string, start=0, opts=DefaultVe
   ## Returns true if the given package-version pair matches the dependency.
   cmpIgnoreStyle(package, dep.packageName) == 0 and
   (dep.versionRule.isNil or dep.versionRule.matches(parseVersion(version, start, opts)))
+
+proc matches*(dep: Dependency, release: Release): bool =
+  ## Returns true if the given release matches the dependency.
+  cmpIgnoreStyle(release.packageName, dep.packageName) == 0 and
+  (dep.versionRule.isNil or dep.versionRule.matches(release.version))

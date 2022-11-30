@@ -1,7 +1,7 @@
 import std/uri
 
 type
-  Version* = object ##\
+  Version* = object of RootObj ##\
     ## Represents a version conforming with Semver.
     ##
     ## A Semver version has the form:
@@ -48,10 +48,17 @@ type
     of vrAnd, vrOr:
       left*, right*: VersionRule
 
-  Dependency* = object ##\
-    ## A dependency is a package name with a corresponding VersionRule.
+  Dependency* = object of RootObj ##\
+    ## A dependency is a package name with a corresponding VersionRule, and
+    ## sometimes a URI that helps determine where the package is located.
     packageName*: string
     versionRule*: VersionRule
+    location*: Uri
+
+  Release* = object of RootObj ##\
+    ## A Release is a specific released version of a package. 
+    packageName*: string
+    version*: Version
     location*: Uri
 
   ParseVersionError* = object of ValueError
