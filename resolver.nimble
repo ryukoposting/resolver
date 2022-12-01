@@ -1,8 +1,8 @@
 # Package
 
-version       = "0.2.0"
+version       = "0.3.0"
 author        = "Evan Perry Grove"
-description   = "Dependency resolution and semantic versioning utils"
+description   = "Dependency resolution, semantic versioning, and SPDX license utils"
 license       = "BSD-3-Clause"
 srcDir        = "src"
 

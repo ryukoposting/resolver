@@ -9,8 +9,11 @@ Version 0.1.0, 2022/11/18:
     - `!=`
   - Dependency string parsing
 
-Version 0.2.0, 2022/??/??:
+Version 0.2.0, 2022/11/30:
   - Allow locator URIs in dependency strings
   - Add the `Release` type, which represents a particular package-version pair
   - Make `Version`, `Dependency`, and `Release` into subtypes of `RootObj` so
     that package users can subclass them
+
+Version 0.3.0, 2022/??/??:
+  - Add SPDX identifier support

@@ -61,6 +61,10 @@ type
     version*: Version
     location*: Uri
 
+  License* = object of RootObj ##\
+    ## Represents an SPDX license.
+    id*: string ## The license's ID.
+
   ParseVersionError* = object of ValueError
 
 type
